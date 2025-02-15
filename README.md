@@ -1,16 +1,30 @@
-# Telegram Music Bot 🎶
+<h1 align="center">🎵 Telegram Music Bot 🎵</h1>  
+<p align="center">
+  <img src="https://img.shields.io/github/stars/mycreation6666/Satyam?style=social">
+  <img src="https://img.shields.io/github/forks/mycreation6666/Satyam?style=social">
+  <img src="https://img.shields.io/badge/Made%20With-Python-blue">
+  <img src="https://img.shields.io/badge/License-MIT-green">
+</p>
 
-A simple Telegram bot that plays YouTube music.
-
-## 🚀 Features
-✅ `/play <song_name>` - Download & play music  
-✅ Supports YouTube audio  
-✅ Works on VPS & Docker  
+<p align="center">
+  <b>A powerful Telegram bot to play music from YouTube.</b>  
+  <br>Supports direct YouTube streaming, downloads, and more!
+</p>
 
 ---
 
-## **🚀 Deploy on VPS (One-Click Copy)**
-Click the button below to copy all VPS deployment commands in one click:  
+## 🎯 **Features**
+✅ `/play <song_name>` - Download & play music  
+✅ `/pause` & `/resume` - Control playback  
+✅ `/skip` & `/stop` - Manage queue  
+✅ Supports **YouTube, SoundCloud, and Spotify**  
+✅ Works on **VPS, Termux, and Docker**  
+✅ **Auto-update** & multi-instance support  
+
+---
+
+## 🚀 **One-Click VPS Deployment**  
+Click the button below to copy & paste all commands in one click.  
 
 ### **📋 Copy & Paste This in Your VPS Terminal**
 ```bash
