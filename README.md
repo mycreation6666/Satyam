@@ -34,3 +34,94 @@ git clone https://github.com/mycreation6666/Satyam.git && cd Satyam && \
 pip install -r requirements.txt && \
 screen -S musicbot && \
 python3 bot.py
+
+_____
+
+
+➡ To detach screen without stopping bot, press:
+
+CTRL + A, then D
+
+
+---
+
+<h2 align="center">⚡ Easy Deployment Methods</h2>  📌 Deploy on Termux
+
+pkg update && pkg upgrade -y && \
+pkg install python git ffmpeg && \
+git clone https://github.com/mycreation6666/Satyam.git && cd Satyam && \
+pip install -r requirements.txt && \
+python3 bot.py
+
+🐳 Run with Docker
+
+docker build -t musicbot .
+docker run -d --name musicbot musicbot
+
+➡ To stop the bot: docker stop musicbot
+➡ To restart: docker start musicbot
+
+
+---
+
+🔄 Update to Latest Version
+
+cd Satyam && git pull && pip install -r requirements.txt
+screen -r musicbot
+
+➡ To stop the bot: Press CTRL + C
+➡ To restart: Run python3 bot.py
+
+
+---
+
+<h2 align="center">📚 Manual Installation (Step-by-Step)</h2>  <details>
+  <summary>📌 Install Dependencies</summary>sudo apt update && sudo apt upgrade -y
+sudo apt install -y python3 python3-pip ffmpeg screen git
+
+</details><details>
+  <summary>📂 Clone Repository & Install Requirements</summary>git clone https://github.com/mycreation6666/Satyam.git && cd Satyam
+pip install -r requirements.txt
+
+</details><details>
+  <summary>▶ Start the Bot</summary>screen -S musicbot
+python3 bot.py
+
+</details>
+---
+
+❓ FAQ (Common Issues & Fixes)
+
+🔹 Bot is not responding in chat?
+
+✔ Make sure your API keys & tokens are correct.
+
+🔹 Bot stops after a few minutes?
+
+✔ Use screen to keep it running in the background.
+
+🔹 How to restart the bot?
+
+✔ Use these commands:
+
+screen -r musicbot
+CTRL + C  # Stop the bot
+python3 bot.py  # Restart
+
+
+---
+
+❤️ Support & Contributions
+
+💡 Got an idea? Open an issue or create a pull request!
+⭐ Like this project? Consider starring it on GitHub!
+
+
+---
+
+📜 License
+
+This project is licensed under the MIT License.
+Free to use & modify!
+
+---
