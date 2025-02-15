@@ -77,3 +77,4 @@ python3 bot.py  # Restart
 ## 📜 **License**
 This project is licensed under the **MIT License**.  
 **Free to use & modify!**
+© ™️ ʏᴏ ᴍʏsᴛᴇʀɪᴏᴜs
