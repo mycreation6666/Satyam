@@ -1,10 +1,9 @@
 import os
 import logging
 import asyncio
-from uuid import uuid4
 from yt_dlp import YoutubeDL
-from telegram import Update, InlineQueryResultAudio
-from telegram.ext import Application, CommandHandler, ContextTypes, InlineQueryHandler
+from telegram import Update
+from telegram.ext import Application, CommandHandler, ContextTypes
 from concurrent.futures import ThreadPoolExecutor
 
 # Enable logging
@@ -19,14 +18,14 @@ MAX_FILE_SIZE_MB = 49  # Telegram max limit
 executor = ThreadPoolExecutor(max_workers=5)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Welcome! Use /play <song_name> to play music or search inline using @your_bot_username")
+    await update.message.reply_text("🎶 Welcome! Use /play <song_name> to play music.")
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Commands:\n/play <song_name> - Play a song\n/help - Show this message")
 
 async def play(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
-        await update.message.reply_text("Please provide a song name.")
+        await update.message.reply_text("❌ Please provide a song name.")
         return
 
     song_name = " ".join(context.args)
@@ -39,6 +38,7 @@ def download_and_send_song(update: Update, song_name: str):
             "format": "bestaudio/best",
             "outtmpl": "song.%(ext)s",
             "postprocessors": [{"key": "FFmpegExtractAudio", "preferredcodec": "mp3", "preferredquality": "192"}],
+            "quiet": True
         }
 
         with YoutubeDL(ydl_opts) as ydl:
@@ -47,7 +47,7 @@ def download_and_send_song(update: Update, song_name: str):
 
         file_size = os.path.getsize(filename) / (1024 * 1024)
         if file_size > MAX_FILE_SIZE_MB:
-            update.message.reply_text("This song is too large for Telegram.")
+            update.message.reply_text("❌ This song is too large for Telegram.")
             os.remove(filename)
             return
 
@@ -58,34 +58,7 @@ def download_and_send_song(update: Update, song_name: str):
 
     except Exception as e:
         logger.error(f"Error: {e}")
-        update.message.reply_text("Failed to play the song. Try again later.")
-
-async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.inline_query.query
-    if not query:
-        return
-
-    try:
-        ydl_opts = {"quiet": True}
-        with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(f"ytsearch5:{query}", download=False)
-        
-        results = []
-        for entry in info["entries"][:5]:  # Top 5 results
-            results.append(
-                InlineQueryResultAudio(
-                    id=str(uuid4()),
-                    title=entry["title"],
-                    audio_url=entry["url"],
-                    performer=entry.get("uploader", "Unknown"),
-                    caption=f"🎵 {entry['title']}\nUploaded by: {entry.get('uploader', 'Unknown')}"
-                )
-            )
-
-        await update.inline_query.answer(results)
-
-    except Exception as e:
-        logger.error(f"Inline query error: {e}")
+        update.message.reply_text("❌ Failed to play the song. Try again later.")
 
 def main():
     app = Application.builder().token(TOKEN).build()
@@ -93,7 +66,6 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("play", play))
     app.add_handler(CommandHandler("help", help_command))
-    app.add_handler(InlineQueryHandler(inline_query))
 
     app.run_polling()
 
